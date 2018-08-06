@@ -1,0 +1,253 @@
+{% extends "index.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block playerstats %}
+    <!--Show player stats-->
+    <div class="container-fluid" style="overflow: hidden; display: block; max-width: 88rem">
+        <div class="row align-items-center no-gutters d-xl-flex" style="background: url('{{ logo }}') 100% center/60% no-repeat; background-color:#032f4f; color: whitesmoke;">
+
+                <img src="{{ pic }}" class="img-fluid" onError="this.onerror=null;this.src='https://stats.nba.com/media/img/teams/logos/NBA-grey_logo.svg';this.style='max-width: 200px; height:200px;';">
+            
+            <div class="col">
+                <p class="number" style="display: inline-block;">#{{ sum.JERSEY }}</p>
+                <p class="name" style="text-align: left; display: inline-block; max-width: 100px">{{ sum.DISPLAY_FIRST_LAST }}</p>
+                <p class="team" style="display: block;"><img src="{{ logo }}" weight="50px" height="50px">{{ sum.TEAM_CITY }} {{ sum.TEAM_NAME }}</p>
+            </div>
+            
+        </div>
+        
+        <div class="d-flex flex-wrap no-gutters" style="background-color:#032f4f; color: whitesmoke; text-align: center;">
+            <div class="col-4">
+                <div class="row no-gutters">
+                    <div class="col text-truncate border">
+                        <b>HT</b><br>{{ sum.HEIGHT }}
+                    </div>
+                    <div class="col border">
+                        <b>WT</b><br>{{ sum.WEIGHT }} lbs
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col text-truncate border">
+                        <b>AGE</b><br>{{ age }}
+                    </div>
+                    <div class="col text-truncate border">
+                        <b>BORN</b><br>{{ dob }}
+                    </div>
+                </div>
+            </div>  
+            <div class="col-4">
+                <div class="row no-gutters">
+                    <div class="col text-truncate border">
+                        <b>PRIOR</b><br>{{ sum.SCHOOL }}</text>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col text-truncate border">
+                        <b>DRAFT</b><br>{{ sum.DRAFT_YEAR }} Rnd {{ sum.DRAFT_ROUND }} Pick {{ sum.DRAFT_NUMBER }}
+                    </div>
+                    <div class="col text-truncate border">
+                        <b>EXP</b><br>{{ sum.SEASON_EXP }} yrs
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 align-items-center" style="text-align: center;">
+                <div class="row h-100 no-gutters">
+                    <div class="col border">
+                        <b style="vertical-align: 50%;">PTS</b><p class="team">{{ stats.PTS }}</p>
+                    </div>
+                    <div class="col border">
+                        <b style="vertical-align: 50%;">REB</b><br><p class="team">{{ stats.REB }}</p>
+                    </div>
+                    <div class="col border">
+                        <b style="vertical-align: 50%;">AST</b><br><p class="team">{{ stats.AST }}</p>
+                    </div>
+                    <div class="col border">
+                        <b style="vertical-align: 50%;">PIE</b><br><p class="team">
+                            {% if pie is number %} 
+                                {{ "%.1f"|format(pie) }}
+                            {% else %}
+                                {{ pie }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Collapse reference-->
+        <p>
+            <div class="btn-group-sm" role="group" aria-label="Btn group">
+                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#wikiextract" aria-expanded="false" style="background-color:rgba(128, 128, 128, 0.378);">
+                    Summary
+                </button>
+                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#glossary" aria-expanded="false" style="background-color:rgba(128, 128, 128, 0.378);">
+                    Glossary
+                </button>
+            </div>
+        </p>
+        <div class="collapse" id="wikiextract">
+            <div class="card card-body" style=" font-size: 14px;">
+                {{ wiki.extract }}
+            </div>
+        </div>
+        <div class="collapse" id="glossary">
+            <div class="card card-body" style=" font-size: 12px;">
+                <dl class="row">
+                    <div class="col">
+                        <dt>GP</dt>  <dd>Games Played</dd>
+                        <dt>MIN</dt>  <dd>Minutes Played</dd>
+                        <dt>FGM</dt>  <dd>Field Goals Made</dd>
+                        <dt>FGA</dt>  <dd>Field Goals Attempted</dd>
+                        <dt>FG%</dt>  <dd>Field Goal Percentage</dd>
+                    </div>
+                    <div class="col">
+                        <dt>3PM</dt>  <dd>3 Point Field Goals Made</dd>
+                        <dt>3PA</dt>  <dd>3 Point Field Goals Attempted</dd>
+                        <dt>3P%</dt>  <dd>3 Point Field Goals Percentage</dd>
+                        <dt>FTM</dt>  <dd>Free Throws Made</dd>
+                        <dt>FTA</dt>  <dd>Free Throws Attempted</dd>
+                    </div>
+                    <div class="col">
+                        <dt>FT%</dt>  <dd>Free Throw Percentage</dd>
+                        <dt>OREB</dt>  <dd>Offensive Rebounds</dd>
+                        <dt>DREB</dt>  <dd>Defensive Rebounds</dd>
+                        <dt>REB</dt>  <dd>Rebounds</dd>
+                        <dt>AST</dt>  <dd>Assists</dd>
+                    </div>
+                    <div class="col">
+                        <dt>TOV</dt>  <dd>Turnovers</dd>
+                        <dt>STL</dt>  <dd>Steals</dd>
+                        <dt>BLK</dt> <dd>Blocks</dd>
+                        <dt>PF</dt>  <dd>Personal Fouls</dd>
+                        <dt>DD2</dt>  <dd>Double Doubles</dd>
+                    </div>
+                    <div class="col">
+                        <dt>TD3</dt>  <dd>Triple Doubles</dd>
+                        <dt>PTS</dt> <dd>Points</dd>
+                        <dt>+/-</dt> <dd> Plus Minus</dd>
+                    </div>
+                </dl>          
+
+            </div>
+        </div>
+
+
+        <!--Splits table-->
+        <table id="splits" class="table-sm stripe hover order-column compact" style="width:100%; font-size: 12px;">
+            <thead>
+                <tr style="background-color: #0C54B8; color: white;">
+                    <th colspan="26">Traditional Splits</th>
+                </tr>
+                <tr id="hover" style="background-color:#052247; color: white;">
+                    <th style="text-align:left;">By Year</th>
+                    <th>Team</th>
+                    <th>GP</th>
+                    <th>MIN</th>
+                    <th>PTS</th>
+                    <th>FGM</th>
+                    <th>FGA</th>
+                    <th>FG%</th>
+                    <th>3PM</th>
+                    <th>3PA</th>
+                    <th>3P%</th>
+                    <th>FTM</th>
+                    <th>FTA</th>
+                    <th>FT%</th>
+                    <th>OREB</th>
+                    <th>DREB</th>
+                    <th>REB</th>
+                    <th>AST</th>
+                    <th>TOV</th>
+                    <th>STL</th>
+                    <th>BLK</th>
+                    <th>PF</th>
+                    <th>FP</th>
+                    <th>DD2</th>
+                    <th>TD3</th>
+                    <th>+/-</th>
+                </tr>
+            </thead>
+        </table>
+
+        <!--DataTables #splits-->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#splits').dataTable( {
+                    "info": false,
+                    "paging": false,
+                    "searching": false,
+                    "processing": false,
+                    "ajax": {
+                        datatype: 'json',
+                        url: '/table',
+                        dataSrc: 'data',
+                        
+                    },
+                    "columns": [
+                        { "data": "GROUP_VALUE" },
+                        { "data": "TEAM_ABBREVIATION" },
+                        { "data": "GP" },
+                        { "data": "MIN" },
+                        { "data": "PTS" },
+                        { "data": "FGM" },
+                        { "data": "FGA" },
+                        { "data": "FG_PCT", 
+                            "render": function ( data, type, row ) {
+                                if (data == null) {
+                                    return '';
+                                }
+                                else {
+                                    return (data * 100).toPrecision(3)
+                                }
+                            }
+                        },
+                        { "data": "FG3M" },
+                        { "data": "FG3A" },
+                        { "data": "FG3_PCT",
+                            "render": function ( data, type, row ) {
+                                if (data == null) {
+                                    return '';
+                                }
+                                else {
+                                    return (data * 100).toPrecision(3)
+                                }
+                            } 
+                        },
+                        { "data": "FTM" },
+                        { "data": "FTA" },
+                        { "data": "FT_PCT",
+                            "render": function ( data, type, row ) {
+                                if (data == null) {
+                                    return '';
+                                }
+                                else {
+                                    return (data * 100).toPrecision(3)
+                                }
+                            } 
+                        },
+                        { "data": "OREB" },
+                        { "data": "DREB" },
+                        { "data": "REB" },
+                        { "data": "AST" },
+                        { "data": "TOV" },
+                        { "data": "STL" },
+                        { "data": "BLK" },
+                        { "data": "PF" },
+                        { "data": "NBA_FANTASY_PTS" },
+                        { "data": "DD2" },
+                        { "data": "TD3" },
+                        { "data": "PLUS_MINUS" },
+
+
+                    ],
+                    "order": [[ 0, "desc" ]],
+                    "columnDefs": [
+                        { width: 100, targets: 0 }
+                    ],
+                    
+                });
+            });
+        </script>
+
+{% endblock %}

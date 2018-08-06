@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block mainpage %}
+<div class="container-fluid mt-5" id="gameList" style="display: block; max-width: 88rem">
+    <div class="row">
+        <div class="col">
+            <h2 id="todaytext">Today's games</h2> 
+        </div>
+        <div class="col">
+            <div class="mr-2" align="right">
+                <div class="form-group" style="display: inline-block;">
+                    <div class="input-group date" id="datetimepicker" data-target-input="nearest" action="/" method="POST">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker" name="datePick" id="datePick"/>
+                        <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#datetimepicker").keypress(function(event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    var date = $("#datetimepicker").datetimepicker("date")
+                    $.ajax({
+                        url: '/',
+                        type: 'post',
+                        data: {
+                            date: date["_d"],
+                        },
+                        success: function(response){ 
+                            $("#scoreList").html($(response).find("#scoreList"));
+                            $(winColor);
+                        }       
+                    })
+                }
+            });
+        </script>
+    </div>
+    <div class="row align-items-center justify-content-center" id="scoreList">
+        <div id="loading"><i class="fas fa-cog fa-spin fa-7x"></i></div>
+        {% for i in range(gameNum) %}
+        <a class="card p-2 m-1 bg-light" href="/game/{{ gameId[0]['GAME_ID'] }}">
+            <div class="card-body">
+                <div style="display:inline-block;">
+                    <img class="img-fluid" src="https://stats.nba.com/media/img/teams/logos/{{ allstats[i][0]['name'] }}_logo.svg" width="80px" height="80px" alt="Card image cap">
+                    <h5 class="card-title text-center" id="team{{ i }}-0">{{ allstats[i][0]["name"] }}</h5>
+                    <p class="card-text text-center" id="team{{ i }}-0pts">{{ allstats[i][0]["pts"] }}</p>
+                </div>
+                <div style="display:inline-block;">
+                    <img class="img-fluid" src="https://stats.nba.com/media/img/teams/logos/{{ allstats[i][1]['name'] }}_logo.svg" width="80px" height="80px" alt="Card image cap">
+                    <h5 class="card-title text-center" id="team{{ i }}-1">{{ allstats[i][1]["name"] }}</h5>
+                    <p class="card-text text-center" id="team{{ i }}-1pts">{{ allstats[i][1]["pts"] }}</p>
+                </div>
+            </div>  
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    window.onload = winColor;
+    $(document).ajaxStart(function () {
+        $("#loading").show();
+        $(".card").hide();
+        $("#todaytext").hide();
+    }).ajaxStop(function () {
+        $("#loading").hide();
+        $(".card").show();
+    });
+</script>
+{% endblock %}

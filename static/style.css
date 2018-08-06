@@ -1,0 +1,90 @@
+@media screen and (min-width: 601px) {
+    p.number {
+        font-size: 70px;
+    }
+    p.name {
+        font-size: 22px;
+    }
+    p.team {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 600px) {
+    p.number {
+        font-size: 40px;
+    }
+    p.name {
+        font-size: 16px;
+    }
+    p.team {
+        font-size: 14px;
+    }
+}
+
+table.dataTable thead>tr>th.sorting_asc,
+table.dataTable thead>tr>th.sorting_desc,
+table.dataTable thead>tr>th.sorting,
+table.dataTable thead>tr>td.sorting_asc,
+table.dataTable thead>tr>td.sorting_desc,
+table.dataTable thead>tr>td.sorting {
+    padding-right: 1px;
+    background : none;
+}
+
+#hover th:hover {
+    background-color:#0C54B8 !important;
+}
+#glossary dd {
+    margin: 1em 0 0 0;
+    float: left;
+    width: 80%;
+    color:rgba(109, 109, 109, 0.926)
+}
+
+#glossary dt {
+    margin: 1em 1em 0 0;
+    float: left;
+    clear: both;
+    width: 15%;
+    color:rgba(94, 94, 94, 0.9)
+}
+
+.tt-menu
+{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 235px;
+}
+.tt-suggestion.tt-cursor {
+    background-color: #0097cf;
+    color: #fff;
+    cursor: pointer;
+}
+.tt-suggestion {
+    margin: 0;
+    padding: 6px 12px;
+}
+
+h5.card-title {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+p.card-text {
+    font-size: 20px
+}
+
+#loading {
+    display: none;
+}
+
+a.card,
+a.card:hover {
+  color: #212529;
+  text-decoration: none;
+}
+
