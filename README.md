@@ -1,6 +1,9 @@
 # nbastats
 Website for tracking statistics using data from [nba_py](https://github.com/seemethere/nba_py)
 
+## Demo
+![](https://i.imgur.com/BfulE05.gifv)
+
 ## Requirements
 Dependencies included in [requirements.txt](https://github.com/shroud0g/nbastats/blob/master/requirements.txt)
 ```
