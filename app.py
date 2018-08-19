@@ -8,7 +8,8 @@ from datetime import date
 from nba_py import Scoreboard
 from nba_py.game import Boxscore
 from nba_py.team import TeamSummary
-from nba_py.player import get_player, PlayerList, PlayerSummary, PlayerYearOverYearSplits
+from nba_py.player import get_player, PlayerList, PlayerSummary, PlayerYearOverYearSplits, PlayerCareer, PlayerGameLogs
+from nba_py.league import Leaders, LeadersTiles
 
 from flask import Flask, jsonify, render_template, request, session
 
@@ -109,6 +110,10 @@ def search():
             pie = '-'
         return render_template ("id.html", sum=sum, stats=stats, wiki=wiki, pic=pic, logo=logo, age=age, dob=dob, pie=pie)
 
+@app.route('/players', methods=['GET'])
+def players():
+   """Get league leaders"""
+
 
 
 @app.route('/game/<gId>', methods=['GET'])
@@ -156,7 +161,8 @@ def table():
     playerid = session.get("playerid",None)
     table = PlayerYearOverYearSplits(playerid)
     data = table.by_year()
-    return jsonify({"data": data})
+    recentgames = PlayerGameLogs(playerid).info()
+    return jsonify(data, recentgames)
    
 
 @app.route('/playerlist')
