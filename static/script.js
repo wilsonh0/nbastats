@@ -34,7 +34,7 @@ function winColor() {
         var team1 = document.getElementById(p1).innerHTML;
         var team2 = document.getElementById(p2).innerHTML;
         
-        if (team1 > team2) 
+        if (parseInt(team1) > parseInt(team2)) 
         {
             document.getElementById(t1).style.color = '#009933';
             document.getElementById(p1).style.color = '#009933';
