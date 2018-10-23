@@ -33,7 +33,6 @@ function winColor() {
         var p2 = t2 + 'pts';
         var team1 = document.getElementById(p1).innerHTML;
         var team2 = document.getElementById(p2).innerHTML;
-        
         if (parseInt(team1) > parseInt(team2)) 
         {
             document.getElementById(t1).style.color = '#009933';
@@ -51,6 +50,7 @@ function winColor() {
 
     }
 };
+
 
 //Datepicker script
 $(function () {
@@ -79,6 +79,5 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
  
     "num-html-desc": function ( a, b ) {
         return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-    },
-    
+    }
 } );

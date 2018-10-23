@@ -33,20 +33,21 @@
                         },
                         success: function(response){ 
                             $("#scoreList").html($(response).find("#scoreList"));
-                            $(winColor);
+                            $(winColor)
                         }       
                     })
                 }
             });
-        </script>
+        </script>   
     </div>
     <div class="row align-items-center justify-content-center" id="scoreList">
         <div id="loading"><i class="fas fa-cog fa-spin fa-7x"></i></div>
+        {% if gameNum > 0 %}
         {% for i in range(gameNum) %}
-        <a class="card p-2 m-1 bg-light" href="/game/{{ gameId[0]['GAME_ID'] }}">
+        <a class="card p-2 m-1 bg-light" href="/game/{{ gameId[i]['GAME_ID'] }}">
             <div class="card-body">
                 <div style="display:inline-block;">
-                    <img class="img-fluid" src="https://stats.nba.com/media/img/teams/logos/{{ allstats[i][0]['name'] }}_logo.svg" width="80px" height="80px" alt="Card image cap">
+                    <img class="img-fluid" src="https://stats.nba.com/media/img/teams/logos/{{ allstats[i][0]['name'] }}_logo.svg" width="80px" height="80px" alt='{{ allstats[i][0]["name"] }} logo'>
                     <h5 class="card-title text-center" id="team{{ i }}-0">{{ allstats[i][0]["name"] }}</h5>
                     <p class="card-text text-center" id="team{{ i }}-0pts">{{ allstats[i][0]["pts"] }}</p>
                 </div>
@@ -58,6 +59,7 @@
             </div>  
         </a>
         {% endfor %}
+        {% endif %}
     </div>
 </div>
 
